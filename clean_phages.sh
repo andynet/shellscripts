@@ -23,4 +23,4 @@ seqkit fx2tab original.fna                              \
     > clean.fna
 
 # ktImportText -q hosts_krona.txt
-
+# seqkit fx2tab original.fna | grep "complete genome" | grep -v "UNVERIFIED" | sed -e "s/|/\t/g" | grep -Pv "\t\t" | taxonkit name2taxid -i 3 | taxonkit lineage -R -i 6 | awk -F "\t" '{ print $1 "\n" $7 "\n" $8 "\n" $4}' | grep "Bacteria" -A 2 -B 1 --no-group-separator > clean.txt
