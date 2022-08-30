@@ -1,0 +1,20 @@
+URL=https://www.ncbi.nlm.nih.gov/labs/virus/vssi/#/virus?VirusLineage_ss=Bacteriophage,%20all%20taxids&SeqType_s=Nucleotide&Completeness_s=complete
+
+SELECT Accession,GenBank_Title,Host,Sequence
+FROM $URL
+AS .fna
+
+RESULT
+--------------------------------------------------------------------------------
+sequences.fasta
+
+2022-08-30 -> 20697 records
+
+--------------------------------------------------------------------------------
+URL=https://ftp.ncbi.nih.gov/pub/taxonomy/
+
+wget -c $URL
+tar -zxvf taxdump.tar.gz
+mv names.dmp nodes.dmp delnodes.dmp merged.dmp taxonkit_db/
+export TAXONKIT_DB=taxonkit_db/
+
