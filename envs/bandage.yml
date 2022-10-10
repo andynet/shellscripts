@@ -9,4 +9,6 @@ dependencies:
   - cd-hit
   - seqkit
   - gfatools
+  - treecluster
+  - exonerate
 prefix: /home/andy/miniconda/envs/bandage
