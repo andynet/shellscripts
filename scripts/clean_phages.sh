@@ -20,7 +20,6 @@ seqkit fx2tab original.fna                              \
     | taxonkit lineage -R -i 6                          \
     | awk -F "\t" '{ print $1 "\n" $7 "\n" $8 "\n" $4}' \
     | grep "Bacteria" -A 2 -B 1 --no-group-separator    \
-    | sed "s/ /_/g"                                     \
     > clean.txt
 
 # NC_007024 has 2 hosts - Xanthomonas Campestris, Xanthomonas Hortorum
@@ -33,5 +32,11 @@ sed "N;N;N;s/\n/\t/g" clean.txt                         \
     | seqkit tab2fx -w 0                                \
     > clean.fna
 
-# ktImportText -q hosts_krona.txt
+sed "N;N;N;s/\n/\t/g" clean.txt                             \
+    | cut -f 2                                              \
+    | taxonkit reformat -i 1 -S -F -f "{k}\t{g}\t{s}\t{t}"  \
+    | cut -f 2-                                             \
+    > clean.host_tax.txt
+
+ktImportText -q clean.host_tax.txt -o clean.host_tax.html
 

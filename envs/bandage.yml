@@ -11,4 +11,5 @@ dependencies:
   - gfatools
   - treecluster
   - exonerate
+  - krona
 prefix: /home/andy/miniconda/envs/bandage
