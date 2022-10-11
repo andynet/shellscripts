@@ -1,3 +1,4 @@
 data/
-tools/
 bin/
+tools/*
+!tools/README.md

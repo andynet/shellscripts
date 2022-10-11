@@ -10,18 +10,6 @@ set -euxo pipefail
 
 export TAXONKIT_DB=$(realpath ./taxonkit_db)
 
-# seqkit fx2tab original.fna                              \
-#     | grep "complete genome"                            \
-#     | grep -v "UNVERIFIED"                              \
-#     | sed -e "s/|/\t/g"                                 \
-#     | grep -Pv "\t\t"                                   \
-#     | taxonkit name2taxid -i 3                          \
-#     | taxonkit lineage -R -i 6                          \
-#     | awk -F "\t" '{ print $1 " " $7 " " $8 "\t" $4}'   \
-#     | seqkit tab2fx -w 0                                \
-#     | grep "Bacteria" -A 1 --no-group-separator         \
-#     > clean.fna
-
 seqkit fx2tab original.fna                              \
     | grep "complete genome"                            \
     | grep -v "UNVERIFIED"                              \
@@ -35,8 +23,13 @@ seqkit fx2tab original.fna                              \
     | sed "s/ /_/g"                                     \
     > clean.txt
 
+# NC_007024 has 2 hosts - Xanthomonas Campestris, Xanthomonas Hortorum
+# Hortorum probably should not exist
+
 sed "N;N;N;s/\n/\t/g" clean.txt                         \
     | cut -f 1,4                                        \
+    | sort                                              \
+    | uniq                                              \
     | seqkit tab2fx -w 0                                \
     > clean.fna
 
