@@ -28,3 +28,6 @@ function get_unitigs() {
 
 # extract_cluster clusters 4 seqs.fna cluster4.fna
 # get_unitigs cluster4.fna 190 cluster4.gfa
+
+# join -j 1 -o 1.1,1.2,2.1,2.2 <(sort clusters) <(sort lengths.tsv) > merged.txt
+# sort -n -k4 merged.txt > merged.sorted.txt

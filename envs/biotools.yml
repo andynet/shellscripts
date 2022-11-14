@@ -1,0 +1,14 @@
+name: biotools
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - taxonkit
+  - csvtk
+  - seqkit
+  - cd-hit
+  - gfatools
+  - treecluster
+  - exonerate
+  - insilicoseq

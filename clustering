@@ -1,0 +1,3 @@
+Uprava vstupnych suborov, aby neobsahovali nenukleotidy (~/medusa_test/data/):
+    awk '/^>/ {printf("%s%s\t",(N>0?"\n":""),$0);N++;next;} {printf("%s",$0);} END {printf("\n");}' clean.fasta | awk -F '\t' '($2 ~ /^[ATGC]+$/)' | tr "\t" "\n" > clean2.fasta
+Vystup: ~/medusa_test/data/clean2.fasta

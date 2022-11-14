@@ -12,4 +12,7 @@ dependencies:
   - treecluster
   - exonerate
   - krona
+  - biopython
+  - scipy
+  - insilicoseq
 prefix: /home/andy/miniconda/envs/bandage
