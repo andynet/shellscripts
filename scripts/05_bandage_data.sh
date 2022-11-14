@@ -24,7 +24,8 @@ function get_supported_phages() {
     assembly=${2}   # assembly.gfa
     min_size="1000"
 
-    name="${assembly%%.*}"
+    filename=$(basename ${assembly})
+    name="$(dirname ${assembly})/${filename%%.*}"
 
     gfatools gfa2fa "${assembly}" > "${name}.fna"
 
