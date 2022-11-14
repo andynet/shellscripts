@@ -4,11 +4,13 @@ channels:
   - bioconda
   - defaults
 dependencies:
-  - taxonkit
-  - csvtk
-  - seqkit
+  - blast
   - cd-hit
-  - gfatools
-  - treecluster
+  - csvtk
   - exonerate
+  - gfatools
   - insilicoseq
+  - krona
+  - seqkit
+  - taxonkit
+  - treecluster

@@ -6,13 +6,4 @@ channels:
 dependencies:
   - bandage
   - blast
-  - cd-hit
-  - seqkit
-  - gfatools
-  - treecluster
-  - exonerate
-  - krona
-  - biopython
-  - scipy
-  - insilicoseq
 prefix: /home/andy/miniconda/envs/bandage
