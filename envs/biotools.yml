@@ -4,6 +4,7 @@ channels:
   - bioconda
   - defaults
 dependencies:
+  - bandage
   - blast
   - cd-hit
   - csvtk
