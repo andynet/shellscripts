@@ -18,23 +18,22 @@
 # shatter_gfa assembly.gfa -> assembly_comps/componentX.gfa, assembly.gfa.len, assembly.gfa.seg
 function shatter_gfa() {
     gfa_file="${1}"
-    gfa_comps="${gfa_file%.*}_comps"
+    base="${gfa_file%.*}"
 
-    # rm -r "${gfa_comps}"
-    # mkdir -p "${gfa_comps}"
-    GFASubgraph -g "${gfa_file}" output_comps --output_dir "${gfa_comps}" -n 100 --seq-size
-    #  --seq-size
-    # without the -n option, it does not sort components
+    n_comps=$(Bandage info "${gfa_file}" | grep "Connected components" | tr -s " " | cut -f3 -d " ")
 
-    for file in "${gfa_comps}/component"{1..100}".gfa"; do
-        gfatools stat "${file}" >> "${gfa_file}.stats";
-        # Bandage info component1.gfa
+    GFASubgraph -g "${gfa_file}" output_comps --output_dir "${base}_comps" -n "${n_comps}" --seq-size
+
+    for i in $(eval "echo {1..${n_comps}}"); do
+        file="${base}_comps/component${i}.gfa";
+        gfatools stat "${file}" >> "${base}.stats";
+        Bandage info "${file}" >> "${base}.stats";
     done;
 
-    grep "Number of segments" "${gfa_file}.stats" > "${gfa_file}.seg"
-    grep "Total segment length" "${gfa_file}.stats" > "${gfa_file}.len"
-    rm "${gfa_file}.stats"
+    grep "Total segment length" "${base}.stats" > "${base}.len"
+    grep "Number of segments"   "${base}.stats" > "${base}.nseg"
+    grep "Median depth"         "${base}.stats" > "${base}.depth"
 }
 
-echo 'shatter_gfa "../../data/samples/RUS2.gfa"'
+# echo 'shatter_gfa "../../data/samples/RUS2.gfa"'
 # rm -r RUS1_comps/ RUS1.gfa.len RUS1.gfa.seg
