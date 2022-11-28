@@ -37,3 +37,5 @@ function shatter_gfa() {
 
 # echo 'shatter_gfa "../../data/samples/RUS2.gfa"'
 # rm -r RUS1_comps/ RUS1.gfa.len RUS1.gfa.seg
+
+# function filter_shattered_gfa() {}
