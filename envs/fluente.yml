@@ -1,0 +1,12 @@
+name: fluente
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - spades
+  - medusa
+  - exonerate
+  - mummer
+  - blast
+prefix: /home/andy/miniconda/envs/fluente
