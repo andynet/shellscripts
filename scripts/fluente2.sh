@@ -44,3 +44,7 @@ function filter() {
 
     rm "${dir}/${sample}.txt"
 }
+
+function edit_dist() {
+    needle -auto a.fna b.fna -outfile tmp.needle
+}
