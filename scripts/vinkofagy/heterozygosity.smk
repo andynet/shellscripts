@@ -57,3 +57,15 @@ rule map_short:
         bwa mem {params.idx} -p {input.reads} | samtools sort -O bam > {output.bam}
         samtools index {output.bam} 
     """ 
+
+rule mpileup:
+    input:
+        ref="{datadir}/{filename}.fna",
+        bam="{datadir}/{reads}_mapped_to_{filename}.bam",
+    output: 
+        mpileup="{datadir}/{reads}_mapped_to_{filename}.mpileup.txt",
+    shell:"""
+        samtools mpileup -f {input.ref} -s {input.bam} > {output}
+        # samtools flagstat {input}
+        # bcftools call -m mpileup.txt
+    """ 
